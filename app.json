@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "hackGT",
+    "slug": "hackGT",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
