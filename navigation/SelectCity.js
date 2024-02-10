@@ -23,7 +23,7 @@ const SelectCity = () => {
       </View>
     <View style = {[styles.LeftCategory, { height: height - ContentViewHeight, top : ContentViewHeight }, ]}>
     <View style = {styles.CardKeeper}>
-      <Card style = {{height : '10%', aspectRatio: 1}} imageUrl={require("./assets/atl.jpg")} text="COUNTRY 2" />
+      <Card style = {{height : '10%', aspectRatio: 1}} imageUrl={require("./assets/atl.jpg")} text="COUNTRY 2"/>
       <Card imageUrl={require("./assets/det.jpg")} text = "COUNTY 1" />
       </View>
     </View>
