@@ -19,14 +19,34 @@ const SelectCity = () => {
   return (
     <View style = {styles.Main}>
       <View style = {styles.TileHolder} onLayout={GetHeight}>
-      <Text style={{textAlign: 'center', fontSize: 46, padding: 5, color: "grey"}}>Select County</Text>
+        <Text style={{textAlign: 'center', fontSize: 46, padding: 5, color: "grey"}}>Select County</Text>
       </View>
-    <View style = {[styles.LeftCategory, { height: height - ContentViewHeight, top : ContentViewHeight }, ]}>
-    <View style = {styles.CardKeeper}>
-      <Card style = {{height : '10%', aspectRatio: 1}} imageUrl={require("./assets/atl.jpg")} text="COUNTRY 2" />
-      <Card imageUrl={require("./assets/det.jpg")} text = "COUNTY 1" />
+
+      <View style = {[styles.LeftCategory, { height: height - ContentViewHeight, top : ContentViewHeight }, ]}>
+        <View style = {styles.CardKeeper}>
+          <Card style = {{height : '10%', aspectRatio: 1}} imageUrl={require("./assets/atl.jpg")} text="Atlanta (city)" />
+          <Card imageUrl={require("./assets/det.jpg")} text = "Cherokee County" />
+          <Card imageUrl={require("./assets/det.jpg")} text = "Cobb County" />
+          <Card imageUrl={require("./assets/det.jpg")} text = "Douglas County" />
+          <Card imageUrl={require("./assets/det.jpg")} text = "Forsyth County" />
+          <Card imageUrl={require("./assets/det.jpg")} text = "Gwinnett County" />
+          <Card imageUrl={require("./assets/det.jpg")} text = "Rockdale County" />
+          <Card imageUrl={require("./assets/det.jpg")} text = "Clayton County" />
+          <Card imageUrl={require("./assets/det.jpg")} text = "DeKalb County" />
+          <Card imageUrl={require("./assets/det.jpg")} text = "Fayette County" />
+          <Card imageUrl={require("./assets/det.jpg")} text = "Fulton County" />
+          <Card imageUrl={require("./assets/det.jpg")} text = "Henry County" />
+        </View>
       </View>
-    </View>
+
+      <View style = {[styles.RightCategory, { height: height - ContentViewHeight, top : ContentViewHeight }, ]}>
+        <View style = {styles.CardKeeper}>
+          <Card style = {{height : '10%', aspectRatio: 1}} imageUrl={require("./assets/det.jpg")} text="Restaurants" />
+          <Card imageUrl={require("./assets/det.jpg")} text = "Supermarkets" />
+          <Card imageUrl={require("./assets/det.jpg")} text = "Pharmacies" />
+          <Card imageUrl={require("./assets/det.jpg")} text = "Gyms" />
+        </View>
+      </View>  
     </View>
   );
 };
@@ -50,6 +70,13 @@ const styles = StyleSheet.create({
     {
       position: "absolute",
       left: 0,
+      width: segmentWidth
+      
+    },
+    RightCategory:
+    {
+      position: "absolute",
+      right: 0,
       width: segmentWidth
       
     },
