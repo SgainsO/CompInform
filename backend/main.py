@@ -3,8 +3,11 @@ from langchain.chains import RetrievalQA
 from langchain_openai import ChatOpenAI
 from fastapi import FastAPI, Query
 from typing import Optional
+from uvicorn import run
 import requests
 import os
+
+app = FastAPI()
 
 you_api_key : str
 open_api : str
@@ -33,5 +36,14 @@ yr = YouRetriever()
 model = "gpt-3.5-turbo-16k"
 qa = RetrievalQA.from_chain_type(llm=ChatOpenAI(model=model), chain_type="stuff", retriever=yr)
 
+@app.get("/")
+async def DoNothing():
+    return "Connected"
 
-print(qa.invoke("how was the New York City pinball ban lifted?"))
+
+@app.get("/GivePrompt/{prompt}")
+async def get_data(prompt):
+    return qa.invoke({prompt})
+
+
+run(app, host="0.0.0.0", port= 8000)
