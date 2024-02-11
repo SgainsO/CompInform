@@ -1,21 +1,32 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import React, { useState,  useEffect} from 'react';
+import { View, Text, StyleSheet, Dimensions, Touchable, TouchableOpacity, Image } from 'react-native';
 import Card from './components/card.js'; // Assuming both files are in the same directory
 const {width, height} = Dimensions.get('window')
 cardHeight = height * 1/6
 segmentWidth = width * 1/2
+import {GetPrompt} from "./components/api_connect.js"
 
 
 
 const SelectCity = () => {
   const [ContentViewHeight, setContentViewHeight] = useState(0)
-
+  const [Location, SetLocation] = useState("Tampa")
+  const [ResponseText, ChangeResponse] = useState(" ") 
+  const [r2, cr2] = useState(" ")
   const GetHeight = (event) =>
   {
     const {height} = event.nativeEvent.layout;
     setContentViewHeight(height)
   }
- 
+  const AskYou = async (area, q1, q2) => {
+    const resp = await GetPrompt(q1 + area)
+    ChangeResponse(resp.result);
+
+    const respe = await GetPrompt(q1 + area)
+    cr2(respe.result);
+  }
+
+
   return (
     <View style = {styles.Main}>
       <View style = {styles.TileHolder} onLayout={GetHeight}>
@@ -40,12 +51,19 @@ const SelectCity = () => {
       </View>
 
       <View style = {[styles.RightCategory, { height: height - ContentViewHeight, top : ContentViewHeight }, ]}>
-        <View style = {styles.CardKeeper}>
-          <Card style = {{height : '10%', aspectRatio: 1}} imageUrl={require("./assets/det.jpg")} text="Restaurants" />
-          <Card imageUrl={require("./assets/det.jpg")} text = "Supermarkets" />
-          <Card imageUrl={require("./assets/det.jpg")} text = "Pharmacies" />
-          <Card imageUrl={require("./assets/det.jpg")} text = "Gyms" />
-        </View>
+        <View style = {styles.TabloHold}>
+          <Image source = {require('./assets/atl.jpg')} style = {styles.Tablo} />
+          </View>
+          <TouchableOpacity style= {styles.Button} onPressIn={() => 
+            {AskYou(Location, "What kind of permits should someone have before making a restraunt in Tampa.")}}>
+            <Text>More Information</Text>
+          </TouchableOpacity>
+          <View style = {styles.ParagraphVIew}>
+            <Text style = {{fontWeight: 'bold', textAlign: 'center'}}>General inforamation</Text>
+            <Text>{ResponseText}</Text>
+ 
+          </View>
+          
       </View>  
     </View>
   );
@@ -91,6 +109,39 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         flex: 1,
 //        backgroundColor: '#b7b9ec'
+    },
+    TabloHold:
+    {
+      aspectRatio: 1,
+      alignSelf: 'center', 
+      marginLeft: 20,
+      marginRight: 20,
+      marginTop: 80,
+      marginBottom: 30,
+      width: segmentWidth - 80,
+      backgroundColor: "black",
+      height: height * 1/2 - 40
+
+    },
+    Tablo:
+    {
+      flex: 1,
+      resizeMode: 'contain',
+      width : '100%',
+      aspectRatio: 1,
+    },
+    ParagraphVIew:
+    {
+      textAlign: 'center',
+      margin: 10
+    },
+    Button:
+    {
+      padding: 20,
+      alignSelf: 'center',
+      backgroundColor: '#dcda98',
+      justifyContent: 'center',
+      alignContent: 'center'
     }
 
     
