@@ -98,7 +98,17 @@ const styles = StyleSheet.create({
       width: segmentWidth
       
     },
-  
+    ButtonContainer:
+    {
+      justifyContent: 'center',
+      width: segmentWidth /2,
+      flexDirection: 'row'
+    },
+    ChoiceBtn:
+    {
+      margin: 10
+    },
+
     LeftCategoryInner:
     {
       transform: [{rotateY: '180deg'}],
