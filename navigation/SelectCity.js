@@ -9,6 +9,23 @@ import {GetPrompt} from "./components/api_connect.js"
 
 
 const SelectCity = () => {
+
+  const FOODCHOICE = 
+  {
+    COFFEE: 0,
+    AMERICAN: 1,
+    ASIAN: 2,
+    BARS: 3,
+    DESERT: 4,
+    MEXICAN: 5,
+    ITALIAN: 6,
+    TRUCK: 7,
+    ANY: 8
+
+  }
+
+  Object.freeze(FOODCHOICE)
+
   const [ContentViewHeight, setContentViewHeight] = useState(0)
   const [Location, SetLocation] = useState("Tampa")
   const [ResponseText, ChangeResponse] = useState(" ") 
@@ -34,19 +51,20 @@ const SelectCity = () => {
       </View>
 
       <View style = {[styles.LeftCategory, { height: height - ContentViewHeight, top : ContentViewHeight }, ]}>
-        <View style = {styles.CardKeeper}>
-          <Card style = {{height : '10%', aspectRatio: 1}} imageUrl={require("./assets/atl.jpg")} text="Atlanta (city)" />
-          <Card imageUrl={require("./assets/det.jpg")} text = "Cherokee County" />
-          <Card imageUrl={require("./assets/det.jpg")} text = "Cobb County" />
-          <Card imageUrl={require("./assets/det.jpg")} text = "Douglas County" />
-          <Card imageUrl={require("./assets/det.jpg")} text = "Forsyth County" />
-          <Card imageUrl={require("./assets/det.jpg")} text = "Gwinnett County" />
-          <Card imageUrl={require("./assets/det.jpg")} text = "Rockdale County" />
-          <Card imageUrl={require("./assets/det.jpg")} text = "Clayton County" />
-          <Card imageUrl={require("./assets/det.jpg")} text = "DeKalb County" />
-          <Card imageUrl={require("./assets/det.jpg")} text = "Fayette County" />
-          <Card imageUrl={require("./assets/det.jpg")} text = "Fulton County" />
-          <Card imageUrl={require("./assets/det.jpg")} text = "Henry County" />
+        <View style = {styles.ButtonContainer}>
+            <TouchableOpacity style = {ChoiceBtn}><Text></Text></TouchableOpacity>
+            <TouchableOpacity style = {ChoiceBtn}></TouchableOpacity>
+            <TouchableOpacity style = {ChoiceBtn}></TouchableOpacity>
+        </View>
+        <View style = {styles.ButtonContainer}>
+            <TouchableOpacity style = {ChoiceBtn}></TouchableOpacity>
+            <TouchableOpacity style = {ChoiceBtn}></TouchableOpacity>
+            <TouchableOpacity style = {ChoiceBtn}></TouchableOpacity>
+        </View>
+        <View style = {styles.ButtonContainer}>
+            <TouchableOpacity style = {ChoiceBtn}></TouchableOpacity>
+            <TouchableOpacity style = {ChoiceBtn}></TouchableOpacity>
+            <TouchableOpacity style = {ChoiceBtn}></TouchableOpacity>
         </View>
       </View>
 
@@ -108,7 +126,6 @@ const styles = StyleSheet.create({
     {
       margin: 10
     },
-
     LeftCategoryInner:
     {
       transform: [{rotateY: '180deg'}],
