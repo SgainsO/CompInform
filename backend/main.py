@@ -6,8 +6,17 @@ from typing import Optional
 from uvicorn import run
 import requests
 import os
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 you_api_key : str
 open_api : str
@@ -43,7 +52,11 @@ async def DoNothing():
 
 @app.get("/GivePrompt/{prompt}")
 async def get_data(prompt):
-    return qa.invoke({prompt})
+    x = qa.invoke({prompt})
+    print(type(x))
+    return x
+
 
 
 run(app, host="0.0.0.0", port= 8000)
+
