@@ -1,0 +1,20 @@
+[
+    {
+        "ZIP Code": 33637,
+        "Neighborhood": "Other",
+        "Other Restaurants": [
+            {
+                "Name": "Central Park Restaurant",
+                "Category": "American & Fast Food",
+                "Population Density": NaN,
+                "Median Household Income": 58000.0
+            },
+            {
+                "Name": "Lennys Subs",
+                "Category": "American & Fast Food",
+                "Population Density": NaN,
+                "Median Household Income": 58000.0
+            }
+        ]
+    }
+]

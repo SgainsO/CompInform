@@ -7,6 +7,8 @@ from uvicorn import run
 import requests
 import os
 from fastapi.middleware.cors import CORSMiddleware
+from TreeModel import *
+
 
 app = FastAPI()
 
@@ -55,6 +57,12 @@ async def get_data(prompt):
     x = qa.invoke({prompt})
     print(type(x))
     return x
+
+@app.get("/GM/{Category}/{Budget}")
+async def get_stats(Category : int, Budget : int):
+    print(calculate(Category, Budget))
+    return json.dumps(Calculate(Category, Budget))
+
 
 
 
