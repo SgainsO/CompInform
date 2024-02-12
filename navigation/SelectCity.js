@@ -1,10 +1,10 @@
 import React, { useState,  useEffect} from 'react';
-import { View, Text, StyleSheet, Dimensions, Touchable, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TextInput, TouchableOpacity, Image } from 'react-native';
 import Card from './components/card.js'; // Assuming both files are in the same directory
 const {width, height} = Dimensions.get('window')
 cardHeight = height * 1/6
 segmentWidth = width * 1/2
-import {GetPrompt} from "./components/api_connect.js"
+import {GetPrompt, GetResults} from "./components/api_connect.js"
 
 
 
@@ -30,6 +30,7 @@ const SelectCity = () => {
   const [Location, SetLocation] = useState("Tampa")
   const [ResponseText, ChangeResponse] = useState(" ") 
   const [r2, cr2] = useState(" ")
+  const [Budget, setBudget] = useState()
   const GetHeight = (event) =>
   {
     const {height} = event.nativeEvent.layout;
@@ -43,29 +44,43 @@ const SelectCity = () => {
     cr2(respe.result);
   }
 
+  const GetInfo = async (cat, d) => {
+    const resp = await GetResults(cat, d)
+  }
+
+  
 
   return (
     <View style = {styles.Main}>
       <View style = {styles.TileHolder} onLayout={GetHeight}>
-        <Text style={{textAlign: 'center', fontSize: 46, padding: 5, color: "grey"}}>Select County</Text>
+        <Text style={{textAlign: 'center', fontSize: 46, padding: 5, color: "grey"}}>Future Feast Analytics</Text>
       </View>
 
       <View style = {[styles.LeftCategory, { height: height - ContentViewHeight, top : ContentViewHeight }, ]}>
+        <TextInput
+        style = {styles.TextInput}
+        value= {Budget}
+        onChangeText={(inputText) => {setBudget(inputText)}}
+        placeholder='Type your budget here'
+        />
         <View style = {styles.ButtonContainer}>
-            <TouchableOpacity style = {ChoiceBtn}><Text></Text></TouchableOpacity>
-            <TouchableOpacity style = {ChoiceBtn}></TouchableOpacity>
-            <TouchableOpacity style = {ChoiceBtn}></TouchableOpacity>
+            <TouchableOpacity style = {styles.ChoiceBtn}><Text style = {{textAlign: "center", top: '30%'}}>Cafe</Text></TouchableOpacity>
+            <TouchableOpacity style = {styles.ChoiceBtn}><Text style = {{textAlign: "center", top: '30%'}}>American</Text></TouchableOpacity>
+            <TouchableOpacity style = {styles.ChoiceBtn}><Text style = {{textAlign: "center", top: '30%'}}>Asian</Text></TouchableOpacity>
         </View>
         <View style = {styles.ButtonContainer}>
-            <TouchableOpacity style = {ChoiceBtn}></TouchableOpacity>
-            <TouchableOpacity style = {ChoiceBtn}></TouchableOpacity>
-            <TouchableOpacity style = {ChoiceBtn}></TouchableOpacity>
+            <TouchableOpacity style = {styles.ChoiceBtn}><Text style = {{textAlign: "center", top: '30%'}}>Bars</Text></TouchableOpacity>
+            <TouchableOpacity style = {styles.ChoiceBtn}><Text style = {{textAlign: "center", top: '30%'}}>Desert</Text></TouchableOpacity>
+            <TouchableOpacity style = {styles.ChoiceBtn}><Text style = {{textAlign: "center", top: '30%'}}>Mexican</Text></TouchableOpacity>
         </View>
         <View style = {styles.ButtonContainer}>
-            <TouchableOpacity style = {ChoiceBtn}></TouchableOpacity>
-            <TouchableOpacity style = {ChoiceBtn}></TouchableOpacity>
-            <TouchableOpacity style = {ChoiceBtn}></TouchableOpacity>
+            <TouchableOpacity style = {styles.ChoiceBtn}><Text style = {{textAlign: "center",top: "30%"}}>Italian</Text></TouchableOpacity>
+            <TouchableOpacity style = {styles.ChoiceBtn}><Text style = {{textAlign: "center",top: "30%"}}>Truck</Text></TouchableOpacity>
+            <TouchableOpacity style = {styles.ChoiceBtn}><Text style = {{textAlign: "center",top: "30%"}}>Any</Text></TouchableOpacity>
         </View>
+        <TouchableOpacity onPress = {
+          () => GetInfo(150000, 5)
+        } style = {styles.PredictButton}><Text style = {{textAlign: "center", top: "30%"}}>Predict</Text></TouchableOpacity>
       </View>
 
       <View style = {[styles.RightCategory, { height: height - ContentViewHeight, top : ContentViewHeight }, ]}>
@@ -106,8 +121,22 @@ const styles = StyleSheet.create({
     {
       position: "absolute",
       left: 0,
-      width: segmentWidth
-      
+      width: segmentWidth,
+      borderRightWidth: 3,
+      borderColor: 'grey',
+      alignContent: 'center',
+      backgroundColor: '#b7b9ec'
+    },
+    TextInput:
+    {
+      height: "10%",
+      marginTop: '8%',
+      alignSelf: "center",
+      textAlign: "center",
+      backgroundColor : 'grey',
+      width: segmentWidth * 2/3,
+      borderRadius: 5,
+      fontSize: 20
     },
     RightCategory:
     {
@@ -118,13 +147,30 @@ const styles = StyleSheet.create({
     },
     ButtonContainer:
     {
-      justifyContent: 'center',
-      width: segmentWidth /2,
+      left: '17%',
+      marginTop: '10%',
+      alignContent: 'center',
+      justifyContent: 'space-between',
+      width: segmentWidth * 2/3 - 10,
       flexDirection: 'row'
     },
     ChoiceBtn:
     {
-      margin: 10
+      flex: 1,
+      textAlign: 'center',
+      backgroundColor: "#dcda98",
+      height: '100%',
+      margin: 10, 
+      borderRadius: 5
+    },
+    PredictButton:
+    {
+      width: segmentWidth * 2/3 - 10,
+      left: '17%',
+      backgroundColor: '#dcda98',
+      borderRadius: 5,
+      height: '5%',
+      marginTop: '20%'
     },
     LeftCategoryInner:
     {
@@ -168,7 +214,8 @@ const styles = StyleSheet.create({
       alignSelf: 'center',
       backgroundColor: '#dcda98',
       justifyContent: 'center',
-      alignContent: 'center'
+      alignContent: 'center',
+      borderRadius: 10
     }
 
     
